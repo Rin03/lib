@@ -2867,6 +2867,10 @@ function Library:SetWatermark(Text)
     Library.WatermarkText.Text = Text;
 end;
 
+function Library:SetWatermarkTitle(Text)
+    Library.WatermarkText.Text = Text
+end;
+
 function Library:Notify(Text, Time)
     local XSize, YSize = Library:GetTextBounds(Text, Library.Font, 14);
 
