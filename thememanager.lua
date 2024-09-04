@@ -1,11 +1,11 @@
 local httpService = game:GetService('HttpService')
 local ThemeManager = {} do
-	ThemeManager.Folder = 'LinoriaLibSettings'
+	ThemeManager.Folder = 'JorisLibSettings'
 	-- if not isfolder(ThemeManager.Folder) then makefolder(ThemeManager.Folder) end
 
 	ThemeManager.Library = nil
 	ThemeManager.BuiltInThemes = {
-		["Default"] 		= { 1, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1c1c1c","AccentColor":"ced83c","BackgroundColor":"141414","OutlineColor":"323232"}') },
+		["default"] 		= { 1, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1c1c1c","AccentColor":"ced83c","BackgroundColor":"141414","OutlineColor":"323232"}') },
 		["barbie"] 			= { 2, httpService:JSONDecode('{"FontColor":"8eccfe","MainColor":"fbc6fb","AccentColor":"f9f0a4","BackgroundColor":"f5f7c3","OutlineColor":"ffffff"}') },
 	}
 
