@@ -3437,7 +3437,7 @@ function Library:CreateWindow(...)
                     BackgroundColor3 = 'MainColor';
                 });
 
-                local ButtonLabel = Library:CreateLabel2({
+                local ButtonLabel = Library:CreateLabel3({
                     Size = UDim2.new(1, 0, 1, 0);
                     TextSize = 14;
                     Text = Name;
