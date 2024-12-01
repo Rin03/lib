@@ -184,6 +184,24 @@ function Library:CreateLabel2(Properties, IsHud)
     return Library:Create(_Instance, Properties);
 end;
 
+function Library:CreateLabel3(Properties, IsHud)
+    local _Instance = Library:Create('TextLabel', {
+        BackgroundTransparency = 1;
+        Font = Enum.Font.Code;
+        TextColor3 = Library.AccentColor;
+        TextSize = 16;
+        TextStrokeTransparency = 0;
+    });
+
+    Library:ApplyTextStroke(_Instance);
+
+    Library:AddToRegistry(_Instance, {
+        TextColor3 = 'AccentColor';
+    }, IsHud);
+
+    return Library:Create(_Instance, Properties);
+end;
+
 function Library:MakeDraggable(Instance, Cutoff)
     Instance.Active = true;
 
