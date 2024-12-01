@@ -3484,7 +3484,7 @@ function Library:CreateWindow(...)
                     Block.Visible = true;
 
                     Button.BackgroundColor3 = Library.BackgroundColor;
-                    ButtonLabel.Text.Color = Library.AccentColor;
+                    ButtonLabel.TextColor3 = Library.AccentColor;
                     Library.RegistryMap[Button].Properties.BackgroundColor3 = 'BackgroundColor';
 
                     Tab:Resize();
