@@ -3437,7 +3437,7 @@ function Library:CreateWindow(...)
                     BackgroundColor3 = 'MainColor';
                 });
 
-                local ButtonLabel = Library:CreateLabel3({
+                local ButtonLabel = Library:CreateLabel2({
                     Size = UDim2.new(1, 0, 1, 0);
                     TextSize = 14;
                     Text = Name;
@@ -3484,6 +3484,7 @@ function Library:CreateWindow(...)
                     Block.Visible = true;
 
                     Button.BackgroundColor3 = Library.BackgroundColor;
+                    ButtonLabel.Text.Color = Library.AccentColor;
                     Library.RegistryMap[Button].Properties.BackgroundColor3 = 'BackgroundColor';
 
                     Tab:Resize();
