@@ -3495,7 +3495,7 @@ function Library:CreateWindow(...)
                     Block.Visible = false;
 
                     Button.BackgroundColor3 = Library.MainColor;
-                    Button.TextColor3 = Library.FontColor2;
+                    ButtonLabel.TextColor3 = Library.FontColor2;
                     Library.RegistryMap[Button].Properties.BackgroundColor3 = 'MainColor';
                 end;
 
