@@ -2681,6 +2681,12 @@ do
             Depbox:Resize();
         end);
 
+        function Depbox:TriggerGlobalUpdate()
+            for _, Box in next, Library.DependencyBoxes do
+                Box:Update()
+            end
+        end        
+
         function Depbox:Update()
             print("Checking dependencies...")
 
