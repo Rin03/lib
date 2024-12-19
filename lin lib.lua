@@ -2715,7 +2715,6 @@ do
                 assert(Dependency[2] ~= nil, 'SetupDependencies: Dependency is missing value argument.');
             end
         
-            -- Store the "Toggle" type dependencies in a dedicated list
             Depbox.Dependencies = Depbox.Dependencies or {} -- Ensure Dependencies exists
             Depbox.Dependencies["Toggle"] = Dependencies -- Store toggle dependencies
             Depbox:Update();
@@ -2728,11 +2727,11 @@ do
                 assert(Dependency[2] ~= nil, 'SetupDropdownDependencies: Dependency is missing value argument.');
             end
         
-            -- Store the "Dropdown" type dependencies in a dedicated list
             Depbox.Dependencies = Depbox.Dependencies or {} -- Ensure Dependencies exists
             Depbox.Dependencies["Dropdown"] = Dependencies -- Store dropdown dependencies
             Depbox:Update();
         end
+        
         
 
         Depbox.Container = Frame;
