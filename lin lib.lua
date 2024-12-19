@@ -2712,6 +2712,17 @@ do
             Depbox:Update();
         end;
 
+        function Depbox:SetupDropdownDependencies(Dependencies)
+            for _, Dependency in next, Dependencies do
+                assert(type(Dependency) == 'table', 'SetupDependencies: Dependency is not of type `table`.');
+                assert(Dependency[1], 'SetupDependencies: Dependency is missing element argument.');
+                assert(Dependency[2] ~= nil, 'SetupDependencies: Dependency is missing value argument.');
+            end;
+
+            Depbox.Dependencies = Dependencies;
+            Depbox:Update();
+        end;
+
         Depbox.Container = Frame;
 
         setmetatable(Depbox, BaseGroupbox);
