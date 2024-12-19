@@ -2681,47 +2681,59 @@ do
         end);
 
         function Depbox:Update()
-            for _, Dependency in next, Depbox.Dependencies do
-                local Elem = Dependency[1];
-                local Value = Dependency[2];
-
-                if Elem.Type == 'Toggle' and Elem.Value ~= Value then
-                    Holder.Visible = false;
-                    Depbox:Resize();
-                    return;
-                end;
-                if Elem.Type == "Dropdown" and Elem.Value ~= Value then
-                    Holder.Visible = false
-                    Depbox:Resize()                    
-                    return
+            -- Loop through all dependencies from SetupDependencies and SetupDropdownDependencies
+            for _, Dependencies in next, Depbox.Dependencies do
+                for _, Dependency in next, Dependencies do
+                    local Elem = Dependency[1];
+                    local Value = Dependency[2];
+        
+                    -- Check if the "Toggle" dependency is satisfied
+                    if Elem.Type == 'Toggle' and Elem.Value ~= Value then
+                        Holder.Visible = false;
+                        Depbox:Resize();
+                        return;
+                    end;
+                    
+                    -- Check if the "Dropdown" dependency is satisfied
+                    if Elem.Type == 'Dropdown' and Elem.Value ~= Value then
+                        Holder.Visible = false;
+                        Depbox:Resize();
+                        return;
+                    end;
                 end
-            end;
-
+            end
+        
+            -- If all dependencies are satisfied, show the holder and resize
             Holder.Visible = true;
             Depbox:Resize();
-        end;
-
+        end
+        
         function Depbox:SetupDependencies(Dependencies)
             for _, Dependency in next, Dependencies do
                 assert(type(Dependency) == 'table', 'SetupDependencies: Dependency is not of type `table`.');
                 assert(Dependency[1], 'SetupDependencies: Dependency is missing element argument.');
                 assert(Dependency[2] ~= nil, 'SetupDependencies: Dependency is missing value argument.');
-            end;
-
-            Depbox.Dependencies = Dependencies;
+            end
+        
+            -- Store the "Toggle" type dependencies in a dedicated list
+            Depbox.Dependencies = Depbox.Dependencies or {} -- Ensure Dependencies exists
+            Depbox.Dependencies["Toggle"] = Dependencies -- Store toggle dependencies
             Depbox:Update();
-        end;
-
+        end
+        
         function Depbox:SetupDropdownDependencies(Dependencies)
             for _, Dependency in next, Dependencies do
-                assert(type(Dependency) == 'table', 'SetupDependencies: Dependency is not of type `table`.');
-                assert(Dependency[1], 'SetupDependencies: Dependency is missing element argument.');
-                assert(Dependency[2] ~= nil, 'SetupDependencies: Dependency is missing value argument.');
-            end;
-
-            Depbox.Dependencies = Dependencies;
+                assert(type(Dependency) == 'table', 'SetupDropdownDependencies: Dependency is not of type `table`.');
+                assert(Dependency[1], 'SetupDropdownDependencies: Dependency is missing element argument.');
+                assert(Dependency[2] ~= nil, 'SetupDropdownDependencies: Dependency is missing value argument.');
+            end
+        
+            -- Store the "Dropdown" type dependencies in a dedicated list
+            Depbox.Dependencies = Depbox.Dependencies or {} -- Ensure Dependencies exists
+            Depbox.Dependencies["Dropdown"] = Dependencies -- Store dropdown dependencies
             Depbox:Update();
-        end;
+        end
+        
 
         Depbox.Container = Frame;
 
