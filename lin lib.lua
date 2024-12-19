@@ -2682,55 +2682,48 @@ do
         end);
 
         function Depbox:Update()
-            -- Loop through all dependencies from SetupDependencies and SetupDropdownDependencies
-            for _, Dependencies in next, Depbox.Dependencies do
-                for _, Dependency in next, Dependencies do
-                    local Elem = Dependency[1];
-                    local Value = Dependency[2];
+            print("Checking dependencies...")
+
+            for _, Dependency in next, self.Dependencies or {} do
+                local Elem = Dependency[1]
+                local ExpectedValue = Dependency[2]
+                print("Dependency:", Elem.Type, "Expected:", ExpectedValue, "Actual:", Elem.Value)
         
-                    -- Check if the "Toggle" dependency is satisfied
-                    if Elem.Type == 'Toggle' and Elem.Value ~= Value then
-                        Holder.Visible = false;
-                        Depbox:Resize();
-                        return;
-                    end;
-                    
-                    -- Check if the "Dropdown" dependency is satisfied
-                    if Elem.Type == 'Dropdown' and Elem.Value ~= Value then
-                        Holder.Visible = false;
-                        Depbox:Resize();
-                        return;
-                    end;
+                -- Handle Toggles
+                if Elem.Type == 'Toggle' and Elem.Value ~= ExpectedValue then
+                    Holder.Visible = false
+                    self:Resize()
+                    return
+                end
+        
+                -- Handle Dropdowns
+                if Elem.Type == 'Dropdown' and Elem.Value ~= ExpectedValue then
+                    Holder.Visible = false
+                    self:Resize()
+                    return
                 end
             end
         
-            -- If all dependencies are satisfied, show the holder and resize
-            Holder.Visible = true;
-            Depbox:Resize();
+            -- If all dependencies are satisfied, make the element visible
+            Holder.Visible = true
+            self:Resize()
         end
         
+        
         function Depbox:SetupDependencies(Dependencies)
+            -- Ensure Dependencies exists
+            self.Dependencies = self.Dependencies or {}
+        
+            -- Add the dependencies (Toggle or Dropdown) to the same list
             for _, Dependency in next, Dependencies do
                 assert(type(Dependency) == 'table', 'SetupDependencies: Dependency is not of type `table`.');
                 assert(Dependency[1], 'SetupDependencies: Dependency is missing element argument.');
                 assert(Dependency[2] ~= nil, 'SetupDependencies: Dependency is missing value argument.');
+                table.insert(self.Dependencies, Dependency)
             end
         
-            Depbox.Dependencies = Depbox.Dependencies or {} -- Ensure Dependencies exists
-            Depbox.Dependencies["Toggle"] = Dependencies -- Store toggle dependencies
-            Depbox:Update();
-        end
-        
-        function Depbox:SetupDropdownDependencies(Dependencies)
-            for _, Dependency in next, Dependencies do
-                assert(type(Dependency) == 'table', 'SetupDropdownDependencies: Dependency is not of type `table`.');
-                assert(Dependency[1], 'SetupDropdownDependencies: Dependency is missing element argument.');
-                assert(Dependency[2] ~= nil, 'SetupDropdownDependencies: Dependency is missing value argument.');
-            end
-        
-            Depbox.Dependencies = Depbox.Dependencies or {} -- Ensure Dependencies exists
-            Depbox.Dependencies["Dropdown"] = Dependencies -- Store dropdown dependencies
-            Depbox:Update();
+            -- Call Update to refresh visibility based on the new dependencies
+            self:Update()
         end
         
         
