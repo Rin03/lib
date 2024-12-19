@@ -2690,6 +2690,11 @@ do
                     Depbox:Resize();
                     return;
                 end;
+                if Elem.Type == "Dropdown" and Elem.Value ~= Value then
+                    Holder.Visible = false
+                    Depbox:Resize()                    
+                    return
+                end
             end;
 
             Holder.Visible = true;
