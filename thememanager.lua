@@ -62,7 +62,7 @@ local ThemeManager = {} do
 					isDefault = false
 				end
 			else
-				self.Library:Notify('Failed to decode default theme JSON!', 3)
+				print('Failed to decode default theme JSON!', 3)
 			end
 		elseif self.BuiltInThemes[self.DefaultTheme] then
 			theme = self.DefaultTheme
