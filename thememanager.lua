@@ -118,7 +118,7 @@ local ThemeManager = {} do
 			self:SaveCustomTheme(Options.ThemeManager_CustomThemeName.Value)
 
 			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			Options.ThemeManager_CustomThemeList:SetValue(Options.ThemeManager_CustomThemeName.Value)
+			Options.ThemeManager_CustomThemeList:SetValue(Options.ThemeManager_CustomThemeName.Value .. ".json")
 		end)
 
 		groupbox:AddButton("delete theme" ,function()
