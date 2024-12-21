@@ -120,6 +120,13 @@ local ThemeManager = {} do
 			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
 			Options.ThemeManager_CustomThemeList:SetValue(Options.ThemeManager_CustomThemeName.Value)
 		end)
+
+		groubox:AddButton("delete theme", function()
+			local selectedTheme = Options.ThemeManager_CustomThemeList.Value
+				if isfile("joris.cat/themes/".. selectedTheme) then
+					delfile("joris.cat/themes/".. selectedTheme)
+				end
+		end)
 		
 		groupbox:AddButton('refresh list', function()
 			local currentTheme = Options.ThemeManager_CustomThemeList.Value
@@ -127,12 +134,12 @@ local ThemeManager = {} do
 			Options.ThemeManager_CustomThemeList:SetValue(currentTheme)
 		end)
 
-		groupbox:AddButton('set as default', function()
+		--[[groupbox:AddButton('set as default', function()
 			if Options.ThemeManager_CustomThemeList.Value ~= nil and Options.ThemeManager_CustomThemeList.Value ~= '' then
 				self:SaveDefault(Options.ThemeManager_CustomThemeList.Value)
 				self.Library:Notify(string.format('set default theme to %q', Options.ThemeManager_CustomThemeList.Value))
 			end
-		end)
+		end)]]
 
 		Options.ThemeManager_CustomThemeList:OnChanged(function()
 			if Options.ThemeManager_CustomThemeList.Value == nil then
