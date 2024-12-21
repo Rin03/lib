@@ -150,20 +150,27 @@ local ThemeManager = {} do
 		return decoded
 	end
 
-	function ThemeManager:SaveCustomTheme(file)
-		if file:gsub(' ', '') == '' then
-			return self.Library:Notify('invalid file name for theme (empty)', 3)
+	function ThemeManager:SaveCustomTheme(themeName)
+		-- Validate theme name
+		if themeName:gsub(' ', '') == '' then
+			return self.Library:Notify('Invalid theme name (empty)', 3)
 		end
-
+	
+		-- Build the theme
 		local theme = {}
 		local fields = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
-
+	
 		for _, field in next, fields do
 			theme[field] = Options[field].Value:ToHex()
 		end
-
-		writefile(self.Folder .. '/themes/' .. file .. '.json', httpService:JSONEncode(theme))
+	
+		-- Add the new theme to the BuiltInThemes table
+		self.BuiltInThemes[themeName] = { #self.BuiltInThemes + 1, theme }
+	
+		-- Notify the user
+		self.Library:Notify('Theme "' .. themeName .. '" added to BuiltInThemes!', 3)
 	end
+	
 
 	function ThemeManager:ReloadCustomThemes()
 		local list = listfiles(self.Folder .. '/themes')
