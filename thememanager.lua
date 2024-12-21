@@ -162,7 +162,7 @@ local ThemeManager = {} do
 		end
 	
 		local data = readfile(path)
-		local success, decoded = pcall(httpService:JSONDecode, httpService, data)
+		local success, decoded = pcall(httpService.JSONDecode, httpService, data)
 		
 		if not success then
 			return nil
