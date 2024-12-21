@@ -44,7 +44,7 @@ local ThemeManager = {} do
 
 	function ThemeManager:LoadDefault()		
 		local theme = 'Default'
-		local content = isfile(self.Folder .. '/themes/default.txt') and readfile(self.Folder .. '/themes/default.txt')
+		local content = isfile(self.Folder .. '/themes/default.json') and readfile(self.Folder .. '/themes/default.json')
 
 		local isDefault = true
 		if content then
@@ -66,7 +66,7 @@ local ThemeManager = {} do
 	end
 
 	function ThemeManager:SaveDefault(theme)
-		writefile(self.Folder .. '/themes/default.txt', theme)
+		writefile(self.Folder .. '/themes/default.json', theme)
 	end
 
 	function ThemeManager:CreateThemeManager(groupbox)
