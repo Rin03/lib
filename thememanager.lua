@@ -123,8 +123,9 @@ local ThemeManager = {} do
 		Options.ThemeManager_CustomThemeList:OnChanged(function()
 			if Options.ThemeManager_CustomThemeList.Value == nil then
 				Options.ThemeManager_CustomThemeList.Value:SetValue("default.json")
+			else
+				self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value)
 			end
-			self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value)
 		end)
 
 		ThemeManager:LoadDefault()
