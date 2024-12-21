@@ -121,13 +121,16 @@ local ThemeManager = {} do
 			Options.ThemeManager_CustomThemeList:SetValue(Options.ThemeManager_CustomThemeName.Value .. ".json")
 		end)
 
-		groupbox:AddButton("delete theme" ,function()
-		local selectedTheme = Options.ThemeManager_CustomThemeList.Value
-			if isfile("joris.cat/themes/".. selectedTheme) then
-				delfile("joris.cat/themes/".. selectedTheme)
-				Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			end
-		end, true)
+		groupbox:AddButton({
+			Text = "delete theme" ,
+			Func = function()
+				local selectedTheme = Options.ThemeManager_CustomThemeList.Value
+					if isfile("joris.cat/themes/".. selectedTheme) then
+						delfile("joris.cat/themes/".. selectedTheme)
+						Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
+					end
+				end, 
+			DoubleClick = true})
 		
 		groupbox:AddButton('refresh list', function()
 			local currentTheme = Options.ThemeManager_CustomThemeList.Value
