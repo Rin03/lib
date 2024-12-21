@@ -121,11 +121,11 @@ local ThemeManager = {} do
 			Options.ThemeManager_CustomThemeList:SetValue(Options.ThemeManager_CustomThemeName.Value)
 		end)
 
-		groubox:AddButton("delete theme", function()
-			local selectedTheme = Options.ThemeManager_CustomThemeList.Value
-				if isfile("joris.cat/themes/".. selectedTheme) then
-					delfile("joris.cat/themes/".. selectedTheme)
-				end
+		groupbox:AddButton("delete theme", function()
+		local selectedTheme = Options.ThemeManager_CustomThemeList.Value
+			if isfile("joris.cat/themes/".. selectedTheme) then
+				delfile("joris.cat/themes/".. selectedTheme)
+			end
 		end)
 		
 		groupbox:AddButton('refresh list', function()
