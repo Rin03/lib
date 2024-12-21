@@ -41,25 +41,28 @@ local ThemeManager = {} do
 		self.Library.AccentColorDark = self.Library:GetDarkerColor(self.Library.AccentColor);
 		self.Library:UpdateColorsUsingRegistry()
 	end
-
 	function ThemeManager:LoadDefault()
 		local theme = 'Default' -- Default theme fallback
 		local content = isfile(self.Folder .. '/themes/default.json') and readfile(self.Folder .. '/themes/default.json')
-	
+		
 		local isDefault = true
 		if content then
 			-- Parse JSON content into a table
 			local success, parsedContent = pcall(function()
 				return httpService:JSONDecode(content)
 			end)
-	
+		
 			if success then
-				-- Check if the theme exists in BuiltInThemes
-				if self.BuiltInThemes[parsedContent] then
-					theme = parsedContent
-				elseif self:GetCustomTheme(parsedContent) then
-					theme = parsedContent
-					isDefault = false
+				-- Assuming parsedContent is a table with a 'theme' property or similar
+				if type(parsedContent) == 'table' then
+					-- Adjust based on actual structure of parsedContent
+					local themeName = parsedContent.theme or parsedContent.name
+					if self.BuiltInThemes[themeName] then
+						theme = themeName
+					elseif self:GetCustomTheme(themeName) then
+						theme = themeName
+						isDefault = false
+					end
 				end
 			else
 				print('Failed to decode default theme JSON!', 3)
@@ -157,14 +160,14 @@ local ThemeManager = {} do
 		if not isfile(path) then
 			return nil
 		end
-
+	
 		local data = readfile(path)
-		local success, decoded = pcall(httpService.JSONDecode, httpService, data)
+		local success, decoded = pcall(httpService:JSONDecode, httpService, data)
 		
 		if not success then
 			return nil
 		end
-
+	
 		return decoded
 	end
 
