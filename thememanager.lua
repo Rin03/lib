@@ -104,12 +104,13 @@ local ThemeManager = {} do
 			self:SaveCustomTheme(Options.ThemeManager_CustomThemeName.Value)
 
 			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			Options.ThemeManager_CustomThemeList:SetValue(nil)
+			Options.ThemeManager_CustomThemeList:SetValue(Options.ThemeManager_CustomThemeName.Value)
 		end)
 		
 		groupbox:AddButton('refresh list', function()
+			local currentTheme = Options.ThemeManager_CustomThemeList.Value
 			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			Options.ThemeManager_CustomThemeList:SetValue(nil)
+			Options.ThemeManager_CustomThemeList:SetValue(currentTheme)
 		end)
 
 		groupbox:AddButton('set as default', function()
