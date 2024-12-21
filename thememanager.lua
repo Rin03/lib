@@ -42,28 +42,39 @@ local ThemeManager = {} do
 		self.Library:UpdateColorsUsingRegistry()
 	end
 
-	function ThemeManager:LoadDefault()		
-		local theme = 'Default'
+	function ThemeManager:LoadDefault()
+		local theme = 'Default' -- Default theme fallback
 		local content = isfile(self.Folder .. '/themes/default.json') and readfile(self.Folder .. '/themes/default.json')
-
+	
 		local isDefault = true
 		if content then
-			if self.BuiltInThemes[content] then
-				theme = content
-			elseif self:GetCustomTheme(content) then
-				theme = content
-				isDefault = false;
+			-- Parse JSON content into a table
+			local success, parsedContent = pcall(function()
+				return httpService:JSONDecode(content)
+			end)
+	
+			if success then
+				-- Check if the theme exists in BuiltInThemes
+				if self.BuiltInThemes[parsedContent] then
+					theme = parsedContent
+				elseif self:GetCustomTheme(parsedContent) then
+					theme = parsedContent
+					isDefault = false
+				end
+			else
+				self.Library:Notify('Failed to decode default theme JSON!', 3)
 			end
 		elseif self.BuiltInThemes[self.DefaultTheme] then
-		 	theme = self.DefaultTheme
+			theme = self.DefaultTheme
 		end
-
+	
 		if isDefault then
-			--Options.ThemeManager_ThemeList:SetValue(theme)
+			-- Options.ThemeManager_ThemeList:SetValue(theme)
 		else
 			self:ApplyTheme(theme)
 		end
 	end
+	
 
 	function ThemeManager:SaveDefault(theme)
 		writefile(self.Folder .. '/themes/default.json', theme)
