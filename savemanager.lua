@@ -132,10 +132,10 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:IgnoreThemeSettings()
-		self:SetIgnoreIndexes({ 
-			"BackgroundColor", "MainColor", "AccentColor", "OutlineColor", "FontColor", "FontColor2", -- themes
-			"ThemeManager_ThemeList", 'ThemeManager_CustomThemeList', 'ThemeManager_CustomThemeName', -- themes
-		})
+		--self:SetIgnoreIndexes({ 
+		--	"BackgroundColor", "MainColor", "AccentColor", "OutlineColor", "FontColor", "FontColor2", -- themes
+		--	"ThemeManager_ThemeList", 'ThemeManager_CustomThemeList', 'ThemeManager_CustomThemeName', -- themes
+		--})
 	end
 
 	function SaveManager:BuildFolderTree()
