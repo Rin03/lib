@@ -83,7 +83,7 @@ local ThemeManager = {} do
 
 		table.sort(ThemesArray, function(a, b) return self.BuiltInThemes[a][1] < self.BuiltInThemes[b][1] end)
 
-		groupbox:AddDivider()
+		--[[groupbox:AddDivider()
 		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'theme list', Values = ThemesArray, Default = 1 })
 
 		groupbox:AddButton('set as default', function()
@@ -98,7 +98,7 @@ local ThemeManager = {} do
 		groupbox:AddDivider()
 		groupbox:AddInput('ThemeManager_CustomThemeName', { Text = 'custom theme name' })
 		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'custom themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
-		groupbox:AddDivider()
+		groupbox:AddDivider()]]
 		
 		groupbox:AddButton('save theme', function() 
 			self:SaveCustomTheme(Options.ThemeManager_CustomThemeName.Value)
