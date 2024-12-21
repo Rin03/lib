@@ -2688,12 +2688,10 @@ do
         end        
 
         function Depbox:Update()
-            print("Checking dependencies...")
 
             for _, Dependency in next, self.Dependencies or {} do
                 local Elem = Dependency[1]
                 local ExpectedValue = Dependency[2]
-                print("Dependency:", Elem.Type, "Expected:", ExpectedValue, "Actual:", Elem.Value)
         
                 -- Handle Toggles
                 if Elem.Type == 'Toggle' and Elem.Value ~= ExpectedValue then
