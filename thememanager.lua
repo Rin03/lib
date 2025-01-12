@@ -147,7 +147,7 @@ local ThemeManager = {} do
 
 		Options.ThemeManager_CustomThemeList:OnChanged(function()
 			if Options.ThemeManager_CustomThemeList.Value == nil then
-				pcall(Options.ThemeManager_CustomThemeList.Value:SetValue("default.json"))
+				pcall(Options.ThemeManager_CustomThemeList:SetValue("default.json"))
 			else
 				self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value)
 			end
