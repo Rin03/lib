@@ -42,7 +42,7 @@ local ThemeManager = {} do
 		self.Library:UpdateColorsUsingRegistry()
 	end
 	function ThemeManager:LoadDefault()
-		local theme = 'Default' -- Default theme fallback
+		local theme = 'default' -- Default theme fallback
 		local content = isfile(self.Folder .. '/themes/default.json') and readfile(self.Folder .. '/themes/default.json')
 		
 		local isDefault = true
