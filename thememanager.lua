@@ -47,19 +47,24 @@ local ThemeManager = {} do
 		
 		local isDefault = true
 		if content then
+			print("is content")
 			-- Parse JSON content into a table
 			local success, parsedContent = pcall(function()
 				return httpService:JSONDecode(content)
 			end)
 		
 			if success then
+				print("success")
 				-- Assuming parsedContent is a table with a 'theme' property or similar
 				if type(parsedContent) == 'table' then
 					-- Adjust based on actual structure of parsedContent
+					print("table")
 					local themeName = parsedContent.theme or parsedContent.name
 					if self.BuiltInThemes[themeName] then
+						print("1")
 						theme = themeName
 					elseif self:GetCustomTheme(themeName) then
+						print("2")
 						theme = themeName
 						isDefault = false
 					end
@@ -69,12 +74,15 @@ local ThemeManager = {} do
 			end
 		elseif self.BuiltInThemes[self.DefaultTheme] then
 			theme = self.DefaultTheme
+			print("geen content")
 		end
 	
 		if isDefault then
+			print("isdefault")
 			-- Options.ThemeManager_ThemeList:SetValue(theme)
 		else
 			self:ApplyTheme(theme)
+			print("applytheme custom")
 		end
 	end
 	
